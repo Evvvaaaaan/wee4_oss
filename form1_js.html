@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px;
+        color: #151515;
+        background: #f4f5f8;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .container {
+        width: min(1680px, 100%);
+        padding: 86px 72px 68px;
+        background: #ffffff;
+        border: 1px solid #d8dadd;
+        border-radius: 16px;
+        box-shadow: 0 1px 4px rgb(0 0 0 / 5%);
+      }
+
+      .checkout-form {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 80px;
+      }
+
+      section {
+        min-width: 0;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 400;
+        line-height: 1.2;
+      }
+
+      hr {
+        width: 100%;
+        height: 1px;
+        margin: 20px 0 42px;
+        border: 0;
+        background: #d7d7d7;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      label,
+      legend {
+        font-size: 19px;
+        line-height: 1.35;
+      }
+
+      input,
+      select,
+      button {
+        font: inherit;
+      }
+
+      input[type="email"],
+      input[type="text"],
+      input[type="date"],
+      select,
+      textarea {
+        height: 50px;
+        margin-top: 10px;
+        padding: 0 18px;
+        color: #242424;
+        background: #ffffff;
+        border: 1px solid #cfd1d4;
+        border-radius: 8px;
+        outline: none;
+      }
+
+      input[type="email"]:focus,
+      input[type="text"]:focus,
+      input[type="date"]:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #0879cf;
+        box-shadow: 0 0 0 3px rgb(8 121 207 / 15%);
+      }
+
+      textarea {
+        height: 96px;
+        padding-top: 14px;
+        resize: vertical;
+      }
+
+      input::placeholder {
+        color: #a4a4a4;
+      }
+
+      .customer-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 40px;
+        align-content: start;
+      }
+
+      .customer-info h2,
+      .customer-info hr,
+      .customer-info p:first-of-type {
+        grid-column: 1 / -1;
+      }
+
+      .customer-info p {
+        margin-bottom: 40px;
+      }
+
+      .customer-info input {
+        width: 100%;
+      }
+
+      .customer-info .order-notes {
+        grid-column: 1 / -1;
+      }
+
+      .customer-info textarea {
+        width: 100%;
+      }
+
+      .customer-info p:last-of-type {
+        margin-bottom: 0;
+      }
+
+      .payment-options {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        column-gap: 40px;
+        align-content: start;
+      }
+
+      .payment-options h2,
+      .payment-options hr,
+      .payment-options > fieldset:first-of-type,
+      .payment-options > p:first-of-type {
+        grid-column: 1 / -1;
+      }
+
+      .payment-options > fieldset {
+        min-width: 0;
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      .payment-options > fieldset:first-of-type {
+        display: flex;
+        gap: 0;
+        margin-bottom: 36px;
+      }
+
+      .payment-options > fieldset:first-of-type legend {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      .payment-options > fieldset:first-of-type label {
+        position: relative;
+        min-width: 145px;
+        padding: 10px 20px 18px;
+        color: #929292;
+        cursor: pointer;
+      }
+
+      .payment-options > fieldset:first-of-type label:has(input:checked) {
+        color: #0879cf;
+        font-weight: 700;
+        border-bottom: 2px solid #0879cf;
+      }
+
+      .payment-options input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .payment-options > p:first-of-type {
+        position: relative;
+        margin-bottom: 42px;
+      }
+
+      #card-number {
+        width: 100%;
+        padding-right: 190px;
+      }
+
+      #card-number + span {
+        position: absolute;
+        right: 10px;
+        bottom: 9px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        padding: 0 9px;
+        color: #194fa3;
+        background: #ffffff;
+        border: 1px solid #d7d7d7;
+        border-radius: 5px;
+        font-size: 10px;
+        font-weight: 700;
+        white-space: nowrap;
+      }
+
+      .payment-options > fieldset:last-of-type {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 20px;
+      }
+
+      .payment-options > fieldset:last-of-type legend {
+        grid-column: 1 / -1;
+        margin-bottom: -10px;
+      }
+
+      .payment-options > fieldset:last-of-type label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+      }
+
+      .payment-options select {
+        width: 100%;
+      }
+
+      .payment-options > p:last-of-type input {
+        width: 100%;
+      }
+
+      abbr {
+        text-decoration: none;
+        cursor: help;
+      }
+
+      .order-summary > p:first-of-type {
+        margin-top: 46px;
+      }
+
+      .order-summary strong {
+        font-size: 41px;
+        font-weight: 400;
+        line-height: 1;
+      }
+
+      .order-summary > p:nth-of-type(2) {
+        margin-top: 16px;
+        color: #777777;
+        font-size: 17px;
+      }
+
+      .order-summary > p:nth-of-type(3) {
+        margin-top: 44px;
+        color: #767676;
+        font-size: 16px;
+        line-height: 1.45;
+      }
+
+      .order-summary .terms-consent {
+        margin-top: 18px;
+        color: #555555;
+      }
+
+      .terms-consent label {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      .terms-consent input {
+        width: 17px;
+        height: 17px;
+        margin: 2px 0 0;
+        accent-color: #0879cf;
+      }
+
+      a {
+        color: #0879cf;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      button {
+        width: 100%;
+        height: 52px;
+        margin-top: 20px;
+        color: #ffffff;
+        background: #0879cf;
+        border: 0;
+        border-radius: 7px;
+        font-size: 18px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #056bb8;
+      }
+
+      button:focus-visible {
+        outline: 3px solid rgb(8 121 207 / 30%);
+        outline-offset: 3px;
+      }
+
+      .order-summary > p:last-of-type {
+        margin-top: 30px;
+        color: #767676;
+        text-align: center;
+        font-size: 18px;
+      }
+
+      @media (max-width: 1200px) {
+        body {
+          align-items: flex-start;
+          padding: 28px;
+        }
+
+        .container {
+          padding: 56px 44px;
+        }
+
+        .checkout-form {
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+        }
+
+        .order-summary {
+          grid-column: 1 / -1;
+          max-width: 560px;
+        }
+      }
+
+      @media (max-width: 780px) {
+        body {
+          padding: 16px;
+        }
+
+        .container {
+          padding: 36px 24px;
+          border-radius: 12px;
+        }
+
+        .checkout-form {
+          grid-template-columns: 1fr;
+          gap: 56px;
+        }
+
+        .order-summary {
+          grid-column: auto;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .customer-info,
+        .payment-options {
+          grid-template-columns: 1fr;
+        }
+
+        .customer-info h2,
+        .customer-info hr,
+        .customer-info p:first-of-type,
+        .payment-options h2,
+        .payment-options hr,
+        .payment-options > fieldset:first-of-type,
+        .payment-options > p:first-of-type {
+          grid-column: auto;
+        }
+
+        .payment-options > fieldset:last-of-type {
+          margin-bottom: 32px;
+        }
+
+        #card-number {
+          padding-right: 18px;
+        }
+
+        #card-number + span {
+          position: static;
+          width: fit-content;
+          margin-top: 8px;
+        }
+
+        .order-summary strong {
+          font-size: 34px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <form
+        id="checkout-form"
+        class="checkout-form"
+        action="#"
+        method="post"
+        novalidate
+      >
+        <section class="customer-info">
+          <h2>Your Info</h2>
+          <hr />
+
+          <p>
+            <label for="email">Email</label><br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="first-name">First name</label><br />
+            <input
+              type="text"
+              id="first-name"
+              name="firstName"
+              autocomplete="given-name"
+              minlength="2"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="last-name">Last name</label><br />
+            <input
+              type="text"
+              id="last-name"
+              name="lastName"
+              autocomplete="family-name"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="postal-code">ZIP/ Postal code</label><br />
+            <input
+              type="text"
+              id="postal-code"
+              name="postalCode"
+              autocomplete="postal-code"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="birth-date">Date of birth</label><br />
+            <input type="date" id="birth-date" name="birthDate" required />
+          </p>
+
+          <p class="order-notes">
+            <label for="order-notes">Order notes</label><br />
+            <textarea
+              id="order-notes"
+              name="orderNotes"
+              rows="4"
+              placeholder="Add a note for your order"
+            ></textarea>
+          </p>
+        </section>
+
+        <section class="payment-options">
+          <h2>Payment Options</h2>
+          <hr />
+
+          <fieldset>
+            <legend>Payment method</legend>
+            <label>
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="credit-card"
+                checked
+              />
+              Credit card
+            </label>
+            <label>
+              <input type="radio" name="paymentMethod" value="paypal" />
+              PayPal
+            </label>
+          </fieldset>
+
+          <p>
+            <label for="card-number">Card number</label><br />
+            <input
+              type="text"
+              id="card-number"
+              name="cardNumber"
+              inputmode="numeric"
+              autocomplete="cc-number"
+              placeholder="1234 6723 9123 0411"
+              required
+            />
+            <span aria-label="Accepted cards: Visa, Mastercard, and Discover">
+              VISA &nbsp; Mastercard &nbsp; Discover
+            </span>
+          </p>
+
+          <fieldset>
+            <legend>Expiration date</legend>
+            <label for="expiration-month">Month</label>
+            <select
+              id="expiration-month"
+              name="expirationMonth"
+              autocomplete="cc-exp-month"
+              required
+            >
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+
+            <label for="expiration-year">Year</label>
+            <select
+              id="expiration-year"
+              name="expirationYear"
+              autocomplete="cc-exp-year"
+              required
+            >
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+            </select>
+          </fieldset>
+
+          <p>
+            <label for="security-code"
+              >CVV / CVC <abbr title="Card security code">ⓘ</abbr></label
+            ><br />
+            <input
+              type="text"
+              id="security-code"
+              name="securityCode"
+              inputmode="numeric"
+              autocomplete="cc-csc"
+              maxlength="3"
+              pattern="[0-9]{3}"
+              placeholder="3 digits"
+              required
+            />
+          </p>
+        </section>
+
+        <section class="order-summary">
+          <h2>Total Price</h2>
+          <hr />
+
+          <p><strong>Rp 5,500,543</strong></p>
+          <p>Includes VAT 12%</p>
+
+          <p>
+            By placing this order you agree to our
+            <a href="#terms-and-conditions">Terms &amp; Conditions</a> and
+            confirm that you have read and understood its
+            <a href="#privacy-policy">Privacy Policy</a> and your
+            <a href="#right-of-revocation">Right of Revocation</a>.
+          </p>
+
+          <p class="terms-consent">
+            <label>
+              <input type="checkbox" name="termsAccepted" required />
+              I agree to the Terms &amp; Conditions.
+            </label>
+          </p>
+
+          <button type="submit">Buy Now</button>
+          <p>🛡️ Secure Payment &nbsp; | &nbsp; PCI DSS Compliant</p>
+        </section>
+      </form>
+    </main>
+    <script>
+      const form = document.querySelector("#checkout-form");
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!form.checkValidity()) {
+          const invalidElement = form.querySelector(":invalid");
+
+          form.reportValidity();
+          invalidElement.focus();
+          return;
+        }
+
+        alert("등록이 완료되었습니다.");
+      });
+    </script>
+  </body>
+</html>

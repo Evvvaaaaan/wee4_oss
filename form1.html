@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+  </head>
+  <body>
+    <main class="container">
+      <form class="checkout-form" action="#" method="post">
+        <section class="customer-info">
+          <h2>Your Info</h2>
+          <hr />
+
+          <p>
+            <label for="email">Email</label><br />
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="email"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="first-name">First name</label><br />
+            <input
+              type="text"
+              id="first-name"
+              name="firstName"
+              autocomplete="given-name"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="last-name">Last name</label><br />
+            <input
+              type="text"
+              id="last-name"
+              name="lastName"
+              autocomplete="family-name"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="postal-code">ZIP/ Postal code</label><br />
+            <input
+              type="text"
+              id="postal-code"
+              name="postalCode"
+              autocomplete="postal-code"
+              required
+            />
+          </p>
+
+          <p>
+            <label for="birth-date">Date of birth</label><br />
+            <input type="date" id="birth-date" name="birthDate" required />
+          </p>
+
+          <p class="order-notes">
+            <label for="order-notes">Order notes</label><br />
+            <textarea
+              id="order-notes"
+              name="orderNotes"
+              rows="4"
+              placeholder="Add a note for your order"
+            ></textarea>
+          </p>
+        </section>
+
+        <section class="payment-options">
+          <h2>Payment Options</h2>
+          <hr />
+
+          <fieldset>
+            <legend>Payment method</legend>
+            <label>
+              <input
+                type="radio"
+                name="paymentMethod"
+                value="credit-card"
+                checked
+              />
+              Credit card
+            </label>
+            <label>
+              <input type="radio" name="paymentMethod" value="paypal" />
+              PayPal
+            </label>
+          </fieldset>
+
+          <p>
+            <label for="card-number">Card number</label><br />
+            <input
+              type="text"
+              id="card-number"
+              name="cardNumber"
+              inputmode="numeric"
+              autocomplete="cc-number"
+              placeholder="1234 6723 9123 0411"
+              required
+            />
+            <span aria-label="Accepted cards: Visa, Mastercard, and Discover">
+              VISA &nbsp; Mastercard &nbsp; Discover
+            </span>
+          </p>
+
+          <fieldset>
+            <legend>Expiration date</legend>
+            <label for="expiration-month">Month</label>
+            <select
+              id="expiration-month"
+              name="expirationMonth"
+              autocomplete="cc-exp-month"
+              required
+            >
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+            </select>
+
+            <label for="expiration-year">Year</label>
+            <select
+              id="expiration-year"
+              name="expirationYear"
+              autocomplete="cc-exp-year"
+              required
+            >
+              <option value="2024">2024</option>
+              <option value="2025">2025</option>
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+              <option value="2028">2028</option>
+              <option value="2029">2029</option>
+              <option value="2030">2030</option>
+            </select>
+          </fieldset>
+
+          <p>
+            <label for="security-code"
+              >CVV / CVC <abbr title="Card security code">ⓘ</abbr></label
+            ><br />
+            <input
+              type="text"
+              id="security-code"
+              name="securityCode"
+              inputmode="numeric"
+              autocomplete="cc-csc"
+              maxlength="3"
+              pattern="[0-9]{3}"
+              placeholder="3 digits"
+              required
+            />
+          </p>
+        </section>
+
+        <section class="order-summary">
+          <h2>Total Price</h2>
+          <hr />
+
+          <p><strong>Rp 5,500,543</strong></p>
+          <p>Includes VAT 12%</p>
+
+          <p>
+            By placing this order you agree to our
+            <a href="#terms-and-conditions">Terms &amp; Conditions</a> and
+            confirm that you have read and understood its
+            <a href="#privacy-policy">Privacy Policy</a> and your
+            <a href="#right-of-revocation">Right of Revocation</a>.
+          </p>
+
+          <p class="terms-consent">
+            <label>
+              <input type="checkbox" name="termsAccepted" required />
+              I agree to the Terms &amp; Conditions.
+            </label>
+          </p>
+
+          <button type="submit">Buy Now</button>
+          <p>🛡️ Secure Payment &nbsp; | &nbsp; PCI DSS Compliant</p>
+        </section>
+      </form>
+    </main>
+  </body>
+</html>

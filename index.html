@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Form Practice</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #1f2937;
+        background-color: #f3f4f6;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      main {
+        width: min(760px, 100%);
+        padding: 40px;
+        background-color: #ffffff;
+        border: 1px solid #d1d5db;
+        border-radius: 16px;
+      }
+
+      h1 {
+        margin: 0 0 12px;
+      }
+
+      p {
+        margin: 0 0 28px;
+        color: #6b7280;
+      }
+
+      nav {
+        display: grid;
+        gap: 14px;
+      }
+
+      a {
+        display: block;
+        padding: 18px 20px;
+        color: #075985;
+        background-color: #f0f9ff;
+        border: 1px solid #bae6fd;
+        border-radius: 10px;
+        text-decoration: none;
+      }
+
+      a:hover,
+      a:focus-visible {
+        color: #ffffff;
+        background-color: #0879cf;
+        border-color: #0879cf;
+      }
+
+      strong {
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>HTML Form Practice</h1>
+      <p>HTML 구조부터 CSS와 JavaScript Validation까지 단계별로 확인합니다.</p>
+
+      <nav aria-label="Form practice pages">
+        <a href="form1.html">
+          <strong>STEP 1 — HTML Form</strong>
+          <span>Form 태그와 입력 요소만 적용한 페이지</span>
+        </a>
+        <a href="form1_css.html">
+          <strong>STEP 2 — Form + CSS</strong>
+          <span>레이아웃과 입력 상태 스타일을 적용한 페이지</span>
+        </a>
+        <a href="form1_js.html">
+          <strong>STEP 3 — Form + CSS + JavaScript</strong>
+          <span>HTML Validation과 제출 이벤트를 적용한 페이지</span>
+        </a>
+      </nav>
+    </main>
+  </body>
+</html>
