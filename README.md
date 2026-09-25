@@ -14,7 +14,7 @@ HTML Form의 주요 입력 요소를 구성하고 CSS와 JavaScript Validation�
 ## Links
 
 - GitHub Repository: https://github.com/2026-2-OSS/assign04-c01-22300404
-- Deploy URL: 배포 후 추가 예정
+- Deploy URL: https://wee4-oss.vercel.app/
 - Clone coding reference: https://getbootstrap.com/docs/5.2/examples/checkout/
 - Visual reference: 과제 진행 중 제공된 결제 Form 이미지
 - HTML Form reference: https://www.w3schools.com/html/html_forms.asp
